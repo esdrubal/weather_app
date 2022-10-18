@@ -22,12 +22,7 @@ const LinkStyled = styled.a`
   cursor: pointer;
   padding: 2pt 4pt;`
 
-const TitleStyled = styled.a`
-  flex: 0 0 auto;
-  color: #f2f2f2;
-  line-height: 2.4rem;
-  cursor: pointer;
-  padding: 2pt 4pt;
+const TitleStyled = styled(LinkStyled)`
   font-weight: 900;`
 
 const Separator = styled.span`
@@ -39,7 +34,7 @@ const Separator = styled.span`
 const TopMenu: React.FC<Props> = (props) => {
   return (
     <Wrapper>
-      <TitleStyled>My Weather App</TitleStyled>
+      <Link href="/" passHref><TitleStyled>My Weather App</TitleStyled></Link>
       <Separator/>
       <Separator/>
       <Link href="/" passHref><LinkStyled>Local Weather</LinkStyled></Link>
