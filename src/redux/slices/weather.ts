@@ -12,7 +12,6 @@ interface WeatherLocation {
 // Define a type for the slice state
 interface WeatherState {
   locationCounter: number,
-  currentLocation: WeatherLocation,
   locations: Array<WeatherLocation>,
   lastLocationId: number
 }
@@ -21,6 +20,11 @@ interface AddLocationPayload {
   countryCode: string,
   stateCode: string,
   cityCode: string
+}
+
+interface SetCoordinatesPayload {
+  latitude: number,
+  longitude: number
 }
 
 const defaultLocation: WeatherLocation = {
@@ -34,7 +38,6 @@ const defaultLocation: WeatherLocation = {
 // Define the initial state using that type
 const initialState: WeatherState = {
   locationCounter: 1,
-  currentLocation: defaultLocation,
   locations: [defaultLocation],
   lastLocationId: 0
 }
@@ -44,13 +47,10 @@ export const weatherSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    fetchCurrentLocation: (state) => {
-      
+    fetchLocation: (state, action: PayloadAction<number>) => {
+      console.log("Fetch location")
     },
     addLocation: (state, action: PayloadAction<AddLocationPayload>) => {
-      console.log('Add location')
-      console.log(action)
-
       state.lastLocationId += 1
 
       const country = Country.getCountryByCode(action.payload.countryCode)!
@@ -90,9 +90,14 @@ export const weatherSlice = createSlice({
       const newLocations = state.locations.filter(location => location.id !== action.payload)
       state.locations = newLocations
     },
+    setCurrentLocationCoordinates: (state, action: PayloadAction<SetCoordinatesPayload>) => {
+      const currentLocation = state.locations.find(location => location.id === 0)!
+      currentLocation.longitude = action.payload.longitude
+      currentLocation.latitude = action.payload.latitude
+    },
   },
 })
 
-export const { fetchCurrentLocation, addLocation, removeLocation } = weatherSlice.actions
+export const { fetchLocation, addLocation, removeLocation, setCurrentLocationCoordinates } = weatherSlice.actions
 
 export default weatherSlice.reducer
