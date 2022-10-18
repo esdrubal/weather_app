@@ -1,5 +1,5 @@
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
-import React, { useState } from 'react';
+import React from 'react';
 import { Country, State, City } from "country-state-city";
 import {setCountryCode, setStateCode, setCityCode, closeAddLocation} from '../redux/slices/addLocation'
 import {addLocation} from '../redux/slices/weather'

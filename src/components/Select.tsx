@@ -1,8 +1,4 @@
-import { useAppSelector, useAppDispatch } from '../redux/hooks';
-import React, { useState } from 'react';
-import { Country, State, City } from "country-state-city";
-import {setCountryCode, setStateCode, setCityCode} from '../redux/slices/addLocation'
-import {addLocation} from '../redux/slices/weather'
+import React from 'react';
 
 interface SelectOptions {
   value: string,
