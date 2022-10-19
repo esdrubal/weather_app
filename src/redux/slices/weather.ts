@@ -9,10 +9,21 @@ interface WeatherLocation {
   country: string
 }
 
+interface WeatherLocationDetails {
+  locationId: number,
+  temperature: number,
+  temperatureFeelsLike: number,
+  description: string,
+  humidity: number,
+  airPressure: number,
+  visibility: number
+}
+
 // Define a type for the slice state
 interface WeatherState {
   locationCounter: number,
   locations: Array<WeatherLocation>,
+  locationsDetails: Array<WeatherLocationDetails>,
   lastLocationId: number
 }
 
@@ -31,14 +42,15 @@ const defaultLocation: WeatherLocation = {
   id: 0,
   latitude: 38.7259284,
   longitude: -9.137382,
-  city: '',
-  country: ''
+  city: 'Lisbon',
+  country: 'Portugal'
 }
 
 // Define the initial state using that type
 const initialState: WeatherState = {
   locationCounter: 1,
   locations: [defaultLocation],
+  locationsDetails: [],
   lastLocationId: 0
 }
 
@@ -47,8 +59,10 @@ export const weatherSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    fetchLocation: (state, action: PayloadAction<number>) => {
-      console.log("Fetch location")
+    setLocationDetails: (state, action: PayloadAction<WeatherLocationDetails>) => {
+      const newLocations = state.locationsDetails.filter(locationDetails => locationDetails.locationId !== action.payload.locationId)
+      newLocations.push(action.payload)
+      state.locationsDetails = newLocations
     },
     addLocation: (state, action: PayloadAction<AddLocationPayload>) => {
       state.lastLocationId += 1
@@ -57,7 +71,7 @@ export const weatherSlice = createSlice({
       var longitude = 0
       var latitude = 0
       var cityName = ''
-      console.log(country)
+
       if(action.payload.stateCode === '') {
         longitude = Number(country.longitude)
         latitude = Number(country.latitude)
@@ -98,6 +112,6 @@ export const weatherSlice = createSlice({
   },
 })
 
-export const { fetchLocation, addLocation, removeLocation, setCurrentLocationCoordinates } = weatherSlice.actions
+export const { setLocationDetails, addLocation, removeLocation, setCurrentLocationCoordinates } = weatherSlice.actions
 
 export default weatherSlice.reducer
