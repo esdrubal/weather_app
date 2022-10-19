@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
 import Layout from '../src/components/Layout'
-import LocationWeather from '../src/components/LocationWeather'
+import LocationWeatherTuple from '../src/components/LocationWeatherTuple'
 
 const Home: NextPage = () => {
   return (
     <Layout>
-      <LocationWeather locationId={0} />
+      <LocationWeatherTuple locationId={0} />
     </Layout>
   )
 }

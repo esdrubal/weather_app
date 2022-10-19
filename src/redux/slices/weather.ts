@@ -22,11 +22,17 @@ interface WeatherLocationDetails {
   visibility: number
 }
 
+export interface WeatherLocationForecasts {
+  locationId: number,
+  forecasts: Array<WeatherLocationDetails>
+}
+
 // Define a type for the slice state
 interface WeatherState {
   locationCounter: number,
   locations: Array<WeatherLocation>,
   locationsDetails: Array<WeatherLocationDetails>,
+  locationsForecasts: Array<WeatherLocationForecasts>,
   lastLocationId: number
 }
 
@@ -54,6 +60,7 @@ const initialState: WeatherState = {
   locationCounter: 1,
   locations: [defaultLocation],
   locationsDetails: [],
+  locationsForecasts: [],
   lastLocationId: 0
 }
 
@@ -66,6 +73,11 @@ export const weatherSlice = createSlice({
       const newLocations = state.locationsDetails.filter(locationDetails => locationDetails.locationId !== action.payload.locationId)
       newLocations.push(action.payload)
       state.locationsDetails = newLocations
+    },
+    setLocationForecasts: (state, action: PayloadAction<WeatherLocationForecasts>) => {
+      const newLocations = state.locationsForecasts.filter(locationDetails => locationDetails.locationId !== action.payload.locationId)
+      newLocations.push(action.payload)
+      state.locationsForecasts = newLocations
     },
     addLocation: (state, action: PayloadAction<AddLocationPayload>) => {
       state.lastLocationId += 1
@@ -115,6 +127,6 @@ export const weatherSlice = createSlice({
   },
 })
 
-export const { setLocationDetails, addLocation, removeLocation, setCurrentLocationCoordinates } = weatherSlice.actions
+export const { setLocationDetails, setLocationForecasts, addLocation, removeLocation, setCurrentLocationCoordinates } = weatherSlice.actions
 
 export default weatherSlice.reducer

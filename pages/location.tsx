@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Layout from '../src/components/Layout'
-import LocationWeather from '../src/components/LocationWeather'
+import LocationWeatherTuple from '../src/components/LocationWeatherTuple'
 import { useRouter } from 'next/router'
 
 const Location: NextPage = () => {
@@ -8,7 +8,7 @@ const Location: NextPage = () => {
   var locationId = Number(router.query.id)
   return (
     <Layout>
-      <LocationWeather locationId={locationId} />
+      <LocationWeatherTuple locationId={locationId} />
     </Layout>
   )
 }
