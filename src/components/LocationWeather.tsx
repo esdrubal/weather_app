@@ -2,9 +2,9 @@ import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import React, { useEffect } from 'react';
 import axios from 'axios'
 import styled from 'styled-components'
-import { setCurrentLocationCoordinates, setLocationDetails } from '../redux/slices/weather'
-import {capitalizeFirstChar, round, kelvinToCelsius} from '../helpers'
-import {openWeatherMapApiKey} from '../../config'
+import { setLocationDetails } from '../redux/slices/weather'
+import { capitalizeFirstChar, round, kelvinToCelsius } from '../helpers'
+import { openWeatherMapApiKey } from '../../config'
 
 interface Props {
   locationId: number
@@ -55,14 +55,6 @@ const LocationWeather: React.FC<Props> = (props) => {
   }
 
   useEffect(() => {
-    if (props.locationId === 0 && "geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        dispatch(setCurrentLocationCoordinates({latitude: position.coords.latitude, longitude: position.coords.longitude}))
-        fetchLocationWeather(position.coords.latitude, position.coords.longitude)
-      });
-      return
-    }
-
     if (locationState)
       fetchLocationWeather(locationState!.latitude, locationState!.longitude)
   }, [locationState]);
