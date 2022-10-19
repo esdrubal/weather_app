@@ -39,11 +39,14 @@ const LocationWeather: React.FC<Props> = (props) => {
 
   const fetchLocationWeather = (latitude: number, longitude: number) => {
     axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`)
-      .then(function(result){ 
+      .then(function(result){
         dispatch(setLocationDetails({
           locationId: props.locationId,
+          date: new Date(),
           temperature: result.data.main.temp,
           temperatureFeelsLike: result.data.main.feels_like,
+          temperatureMax: result.data.main.temp_max,
+          temperatureMin: result.data.main.temp_min,
           airPressure: result.data.main.pressure,
           humidity: result.data.main.humidity,
           visibility: result.data.visibility,

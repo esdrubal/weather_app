@@ -11,8 +11,11 @@ interface WeatherLocation {
 
 interface WeatherLocationDetails {
   locationId: number,
+  date: Date,
   temperature: number,
   temperatureFeelsLike: number,
+  temperatureMax: number,
+  temperatureMin: number,
   description: string,
   humidity: number,
   airPressure: number,
