@@ -80,8 +80,15 @@ const LocationWeather: React.FC<Props> = (props) => {
 
   return (
     <div>
-      <CityCountry>{capitalizeFirstChar(locationState!.city)}, {capitalizeFirstChar(locationState!.country)}</CityCountry>
-      Latitude:{round(locationState!.latitude, 4)} Longitude:{round(locationState!.longitude, 4)}
+      { !locationState &&
+        <div>Trying to load unknown location</div>
+      }
+      { locationState &&
+        <div>
+          <CityCountry>{capitalizeFirstChar(locationState!.city)}, {capitalizeFirstChar(locationState!.country)}</CityCountry>
+          Latitude:{round(locationState!.latitude, 4)} Longitude:{round(locationState!.longitude, 4)}
+        </div>
+      }
       { locationDetailsState &&
         <div>
           <MainTemp>{round(kelvinToCelsius(locationDetailsState!.temperature),1)}°C</MainTemp>
