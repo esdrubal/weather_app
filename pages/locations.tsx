@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Layout from '../src/components/Layout'
 import LocationWeatherList from '../src/components/LocationWeatherList'
 
-const Home: NextPage = () => {
+const Locations: NextPage = () => {
   return (
     <Layout>
       <LocationWeatherList />
@@ -10,4 +10,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default Locations
