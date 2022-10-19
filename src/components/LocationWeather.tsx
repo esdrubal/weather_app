@@ -41,7 +41,7 @@ const LocationWeather: React.FC<Props> = (props) => {
       .then(function(result){
         dispatch(setLocationDetails({
           locationId: props.locationId,
-          date: new Date(),
+          timestamp: new Date().getTime(),
           temperature: result.data.main.temp,
           temperatureFeelsLike: result.data.main.feels_like,
           temperatureMax: result.data.main.temp_max,

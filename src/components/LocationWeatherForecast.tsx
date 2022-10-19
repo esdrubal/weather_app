@@ -45,15 +45,13 @@ const LocationWeatherForecast: React.FC<Props> = (props) => {
   const fetchLocationWeather = (latitude: number, longitude: number) => {
     axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${openWeatherMapApiKey}`)
       .then(function(result){
-        console.log('Fetch forecast')
-        console.log(result)
         const forecasts: WeatherLocationForecasts = {
           locationId: props.locationId,
           forecasts: []
         }
         result.data.list.forEach((el:any) => forecasts.forecasts.push({
           locationId: props.locationId,
-          date: new Date(el.dt*1000),
+          timestamp: el.dt*1000,
           temperature: el.main.temp,
           temperatureFeelsLike: el.main.feels_like,
           temperatureMax: el.main.temp_max,
@@ -85,8 +83,8 @@ const LocationWeatherForecast: React.FC<Props> = (props) => {
   if (locationForecastsState)
     forecastElements = locationForecastsState.forecasts.map(forecast => {
       return (
-        <ListItem>
-          {format(forecast.date, "eee', 'LLL d hh'h'")}
+        <ListItem key={forecast.timestamp}>
+          {format(new Date(forecast.timestamp), "eee', 'LLL d hh'h'")}
           <ListValues>
             <Temperatures>{round(kelvinToCelsius(forecast.temperatureMax),1)}/{round(kelvinToCelsius(forecast.temperatureMin),1)}°C</Temperatures>
             <Description>{forecast.description}</Description>
