@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { format } from 'date-fns'
 import { setCurrentLocationCoordinates, setLocationForecasts, WeatherLocationForecasts } from '../redux/slices/weather'
 import {capitalizeFirstChar, round, kelvinToCelsius} from '../helpers'
+import {openWeatherMapApiKey} from '../../config'
 
 interface Props {
   locationId: number
@@ -41,10 +42,8 @@ const LocationWeatherForecast: React.FC<Props> = (props) => {
 
   const dispatch = useAppDispatch()
 
-  const apiKey = "525bead844cbf126aaec797bd62d44f7"
-
   const fetchLocationWeather = (latitude: number, longitude: number) => {
-    axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`)
+    axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${openWeatherMapApiKey}`)
       .then(function(result){
         console.log('Fetch forecast')
         console.log(result)

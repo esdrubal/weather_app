@@ -4,6 +4,7 @@ import axios from 'axios'
 import styled from 'styled-components'
 import { setCurrentLocationCoordinates, setLocationDetails } from '../redux/slices/weather'
 import {capitalizeFirstChar, round, kelvinToCelsius} from '../helpers'
+import {openWeatherMapApiKey} from '../../config'
 
 interface Props {
   locationId: number
@@ -35,10 +36,8 @@ const LocationWeather: React.FC<Props> = (props) => {
 
   const dispatch = useAppDispatch()
 
-  const apiKey = "525bead844cbf126aaec797bd62d44f7"
-
   const fetchLocationWeather = (latitude: number, longitude: number) => {
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${openWeatherMapApiKey}`)
       .then(function(result){
         dispatch(setLocationDetails({
           locationId: props.locationId,
