@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios'
 import styled from 'styled-components'
 import { setCurrentLocationCoordinates, setLocationDetails } from '../redux/slices/weather'
-
+import {capitalizeFirstChar, round, kelvinToCelsius} from '../helpers'
 
 interface Props {
   locationId: number
@@ -50,19 +50,6 @@ const LocationWeather: React.FC<Props> = (props) => {
           description: result.data.weather[0].description
         }))
       });
-  }
-
-  const kelvinToCelsius = (temp: number) => {
-    return temp - 273.15
-  }
-
-  const capitalizeFirstChar = (str:string) => {
-    return str.charAt(0).toUpperCase() + str.slice(1)
-  }
-
-  const round = (value:number, precision:number) => {
-    var multiplier = Math.pow(10, precision || 0);
-    return Math.round(value * multiplier) / multiplier;
   }
 
   useEffect(() => {
