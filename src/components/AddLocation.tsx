@@ -4,9 +4,14 @@ import { Country, State, City } from "country-state-city";
 import {setCountryCode, setStateCode, setCityCode, closeAddLocation} from '../redux/slices/addLocation'
 import {addLocation} from '../redux/slices/weather'
 import Select from './Select'
+import styled from 'styled-components'
 
 interface Props {
 }
+
+const AddLocationText = styled.div`
+  padding-right:5px;
+  font-weight: 600;`
 
 const AddLocation: React.FC<Props> = () => {
   
@@ -38,7 +43,7 @@ const AddLocation: React.FC<Props> = () => {
         dispatch(closeAddLocation())
         e.preventDefault();
       }}>
-        Add Location: 
+        <AddLocationText>Add Location:</AddLocationText> 
         <Select
           options={getCountries()}
           value={countryCode}
