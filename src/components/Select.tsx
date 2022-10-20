@@ -9,6 +9,7 @@ interface Props {
   options: Array<SelectOptions>,
   value: string,
   selectMessage: string,
+  dataTestId: string,
   onChange: (value: string) => void
 }
 
@@ -17,7 +18,7 @@ const Select: React.FC<Props> = (props) => {
   const options = props.options.map(option => <option key={option.value} value={option.value}>{option.text}</option>)
 
   return (
-    <select value={props.value} onChange={(e) => props.onChange(e.currentTarget.value)}>
+    <select data-testid={props.dataTestId} value={props.value} onChange={(e) => props.onChange(e.currentTarget.value)}>
       <option value=''> {props.selectMessage} </option>
       {options}
     </select>

@@ -45,6 +45,7 @@ const AddLocation: React.FC<Props> = () => {
       }}>
         <AddLocationText>Add Location:</AddLocationText> 
         <Select
+          dataTestId="select-country"
           options={getCountries()}
           value={countryCode}
           selectMessage='Select a country'
@@ -54,6 +55,7 @@ const AddLocation: React.FC<Props> = () => {
         />
         {countryCode !== '' && states.length !== 0 &&
           <Select
+            dataTestId="select-state"
             options={states}
             value={stateCode}
             selectMessage='Select a state'
@@ -64,6 +66,7 @@ const AddLocation: React.FC<Props> = () => {
         }
         {stateCode !== '' && cities.length !== 0 &&
           <Select
+            dataTestId="select-city"
             options={cities}
             value={cityCode}
             selectMessage='Select a city'
@@ -73,7 +76,7 @@ const AddLocation: React.FC<Props> = () => {
           />
         }
         {countryCode !== '' && (cityCode !== '' || cities.length === 0) &&
-          <button type="submit">Add</button>
+          <button data-testid="add-location-btn" type="submit">Add</button>
         }
       </form>
     </div>

@@ -38,7 +38,7 @@ const LocationWeatherList: React.FC<Props> = () => {
     return (
       <LocationItem key={locationState.id}>
         <Link href={{ pathname: '/location', query: { id: locationState.id } }}>
-          <LinkStyled>{locationState.city} {locationState.country}</LinkStyled>
+          <LinkStyled>{locationState.city+", "+locationState.country}</LinkStyled>
         </Link>
         <RemoveButton onClick={(e) => { dispatch(removeLocation(locationState.id)); e.preventDefault() }}>Remove</RemoveButton>
       </LocationItem>
