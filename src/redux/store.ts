@@ -1,7 +1,7 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import weatherReducer from './slices/weather'
 import addLocationReducer from './slices/addLocation'
-import storage from 'redux-persist/lib/storage';
+import storage from './storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
 
