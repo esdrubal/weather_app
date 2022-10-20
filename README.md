@@ -1,4 +1,5 @@
-This is a weather app that load data from openweathermap.org and allow the user to create a list of locations to track their weather.
+This is a weather app that loads data from openweathermap.org and allows the user to create a list of locations to track their weather.
+
 The app is written mostly in Typescript and build in React over next.js using Redux as state management. Styling is done by using styled-components.
 Data is presisted using redux-presist which maintains the same state between page loads, reloads and across multiple sessions.   
 The app also displays a 3-hour Forecast for 5 days. The app could present daily forecast but that api is a paid one.
