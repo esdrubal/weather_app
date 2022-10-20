@@ -42,9 +42,11 @@ interface AddLocationPayload {
   cityCode: string
 }
 
-interface SetCoordinatesPayload {
+interface SetCurrentLocationPayload {
   latitude: number,
-  longitude: number
+  longitude: number,
+  city: string,
+  country: string
 }
 
 const defaultLocation: WeatherLocation = {
@@ -119,14 +121,16 @@ export const weatherSlice = createSlice({
       const newLocations = state.locations.filter(location => location.id !== action.payload)
       state.locations = newLocations
     },
-    setCurrentLocationCoordinates: (state, action: PayloadAction<SetCoordinatesPayload>) => {
+    setCurrentLocation: (state, action: PayloadAction<SetCurrentLocationPayload>) => {
       const currentLocation = state.locations.find(location => location.id === 0)!
       currentLocation.longitude = action.payload.longitude
       currentLocation.latitude = action.payload.latitude
+      currentLocation.city = action.payload.city
+      currentLocation.country = action.payload.country
     },
   },
 })
 
-export const { setLocationDetails, setLocationForecasts, addLocation, removeLocation, setCurrentLocationCoordinates } = weatherSlice.actions
+export const { setLocationDetails, setLocationForecasts, addLocation, removeLocation, setCurrentLocation } = weatherSlice.actions
 
 export default weatherSlice.reducer
