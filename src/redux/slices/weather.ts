@@ -49,7 +49,7 @@ interface SetCurrentLocationPayload {
   country: string
 }
 
-const defaultLocation: WeatherLocation = {
+export const defaultLocation: WeatherLocation = {
   id: 0,
   latitude: 38.7259284,
   longitude: -9.137382,
